@@ -1,4 +1,7 @@
 PigBugs
 =======
 
-Class project for Jimmy Lin's project
+Final project for Hadoop class
+
+Introduction
+------------
