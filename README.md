@@ -14,7 +14,7 @@ i.e
 + apache_hadoop/src/test/HopeItWorks.java
 + apache_hadoop/readme.md
 
-Processing step: Take the project folder, flatten it's structure relative (discarding non-java files)
+Processing step: Take the project folder, flatten it's structure (discarding non-java files)
 i.e
 
 + apache_hadoop/HelloWorld.java
