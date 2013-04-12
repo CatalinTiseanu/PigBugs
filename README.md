@@ -9,7 +9,7 @@ Introduction
 Input: A project folder (having all the relevant .java files)
 i.e 
 
-apache_hadoop/src/main/HelloWorld.java
+apache_hadoop/src/main/HelloWorld.java \n
 apache_hadoop/src/main/GoodbyeWorld.java
 apache_hadoop/src/test/HopeItWorks.java
 apache_hadoop/readme.md
