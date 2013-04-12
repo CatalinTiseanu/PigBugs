@@ -9,17 +9,17 @@ Introduction
 Input: A project folder (having all the relevant .java files)
 i.e 
 
-apache_hadoop/src/main/HelloWorld.java \n
-apache_hadoop/src/main/GoodbyeWorld.java
-apache_hadoop/src/test/HopeItWorks.java
-apache_hadoop/readme.md
++ apache_hadoop/src/main/HelloWorld.java
++ apache_hadoop/src/main/GoodbyeWorld.java
++ apache_hadoop/src/test/HopeItWorks.java
++ apache_hadoop/readme.md
 
-Processing step: Take the project folder, flatten it's structure relative to .java files
+Processing step: Take the project folder, flatten it's structure relative (discarding non-java files)
 i.e
 
-apache_hadoop/HelloWorld.java
-apache_hadoop/GoodbyeWorld.java
-apache_hadoop/HopeItWorks.java
++ apache_hadoop/HelloWorld.java
++ apache_hadoop/GoodbyeWorld.java
++ apache_hadoop/HopeItWorks.java
 
 
 Data flow
