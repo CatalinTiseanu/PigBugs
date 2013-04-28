@@ -62,11 +62,11 @@ public class computeMetrics extends EvalFunc<Tuple> {
     public Tuple runCheckstyle(String fileContent, Tuple outputSoFar)
       throws Exception {
         Tuple resultTuple = outputSoFar;
-    
-        try {
-          for (int i = 0; i < countCheckstyleMetrics.length; i++)
+
+        for (int i = 0; i < countCheckstyleMetrics.length; i++)
             countCheckstyleMetrics[i] = 0;
-          
+ 
+        try {
           String tmpFileName = "_udf_tmp_" + NumberOfFilesProcessed;
         
           // we are going to write the lines to disk
@@ -74,11 +74,14 @@ public class computeMetrics extends EvalFunc<Tuple> {
           FileWriter Fw = new FileWriter(tmpFile);
           Fw.write(fileContent);
           Fw.close();
-        
+       
           String udf_str;
-          Process udf_proc = Runtime.getRuntime().exec("java -jar checkstyle-5.6-all.jar -c pigbugs_checks.xml -f xml " + tmpFileName);
+          Process udf_proc = Runtime.getRuntime().exec("java -jar " +
+          "lib/checkstyle-5.6-all.jar -c lib/pigbugs_checks.xml -f xml " +tmpFileName);
           
-          DataInputStream udf_in = new DataInputStream(udf_proc.getInputStream());
+          BufferedReader udf_in =
+          new BufferedReader(new InputStreamReader(udf_proc.getInputStream()));
+          //DataInputStream udf_in = new DataInputStream();
           
           try {
             while ((udf_str = udf_in.readLine()) != null) {
@@ -131,7 +134,7 @@ public class computeMetrics extends EvalFunc<Tuple> {
           
           return output;
         }catch(Exception e){
-            throw WrappedIOException.wrap("Caught exception processing input row ", e);
+            throw WrappedIOException.wrap("Caught exception processing input row " , e);
         }
     }
 }
