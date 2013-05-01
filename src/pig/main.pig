@@ -1,24 +1,31 @@
--- rm -f output/anakia_metrics_by_file
--- rm -f output/anakia_metrics_aggregate
+-- hadoop fs -rmf output/
 
 register lib/computeMetrics.jar;
 register lib/computeAggregate.jar;
+register lib/pigbugs_checks.xml
 
 -- load the data in format (project_name, adjusted_file)) 
-data = load 'data/Anakia.txt' using PigStorage('\\x07') as (project_name: chararray, adjusted_file: chararray);
+data = load 'data/Anakia.txt' using PigStorage('\\x07') as (project_name: chararray, file_name: chararray, adjusted_file: chararray);
 
 -- replace the 'male' separator ('\\x0B') to ('\n')
 proper_data = foreach data generate
 	        project_name,
+                file_name,
                 REPLACE(adjusted_file, '\\x0B', '\n') as proper_file;
 
 -- run metrics on proper data
 metrics = foreach proper_data generate
 	    project_name,
+	    file_name,
 	    computeMetrics(proper_file) as metrics_vector;
 
 -- store metrics by file
 store metrics into 'output/anakia_metrics_by_file';
+
+-- load ticket data
+
+-- ticket_info = load 'data/ticket_counter' using PigStorage(',') as
+		
 
 -- group by project name and aggregate the metrics
 grouped_metrics = group metrics by project_name;
