@@ -1,4 +1,4 @@
--- hadoop fs -rmf output/
+-- author: Catalin-Stefan Tiseanu
 
 register lib/computeAggregate.jar;
 

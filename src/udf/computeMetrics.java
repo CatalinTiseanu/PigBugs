@@ -1,3 +1,4 @@
+// author: Catalin-Stefan Tiseanu
 
 import java.io.*;
 import org.apache.pig.EvalFunc;

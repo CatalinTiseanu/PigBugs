@@ -12,7 +12,7 @@ using namespace std;
 map<string, int> mp;
 
 int main() {
-  char buf[1<<20];
+  char buf[1<<24];
 
   int nr_processed = 0;
 

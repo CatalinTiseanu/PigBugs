@@ -1,3 +1,5 @@
+-- author: Catalin-Stefan Tiseanu
+
 rmf data/bugs_by_project_and_file.txt
 rmf data/bugs_by_project.txt
 

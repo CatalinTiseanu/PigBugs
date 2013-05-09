@@ -1,4 +1,4 @@
--- hadoop fs -rmf output/
+-- author: Catalin-Stefan Tiseanu
 
 register lib/computeMetrics.jar;
 register lib/computeAggregate.jar;
@@ -36,11 +36,7 @@ labeled_data_by_file = foreach joined_bugs_by_file generate
 
 store labeled_data_by_file into 'output/labeled_data_by_file';
 
--- load ticket data
-
--- ticket_info = load 'data/ticket_counter' using PigStorage(',') as
-		
-
+-- group project by metrics
 -- group by project name and aggregate the metrics
 grouped_metrics = group metrics by project_name;
 grouped_metrics_aggregate = foreach grouped_metrics generate
