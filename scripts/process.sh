@@ -1,4 +1,8 @@
+# author: Catalin-Stefan Tiseanu
+# script for transforming to a .csv file from Pig Forma
+# obviously, we could output it directly to a comma separated format, but doing so introduce inflexibility
 # cat .* > all_results
-cat all_results | sed -e 's/\t\+/,/g' > all_results_processed1
-sed 's/((//' all_results_processed1 > all_results_processed2
-sed 's/))//' all_results_processed2 > all_results_processed
+cat ml_file_ncss | sed -e 's/\t\+/,/g' > all_results_processed_tmp1
+sed 's/(//' all_results_processed_tmp1 > all_results_processed_tmp2
+sed 's/)//' all_results_processed_tmp2 > all_results_processed_ncss
+
