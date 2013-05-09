@@ -27,7 +27,9 @@
 
         <!-- Checks for common coding problems               -->
         <!-- See http://checkstyle.sf.net/config_coding.html -->
-        <module name="InnerAssignment"/>
+        <module name="InnerAssignment">
+          <property name="tokens" value="ASSIGN,PLUS_ASSIGN,MINUS_ASSIGN"/>
+        </module>
 
         <!-- Checks for class design                         -->
         <!-- See http://checkstyle.sf.net/config_design.html -->
@@ -44,12 +46,26 @@
         <module name="UpperEll"/>
       
         <!-- Metrics -->
-        <module name="BooleanExpressionComplexity"/>
-        <module name="ClassDataAbstractionCoupling"/>
-        <module name="ClassFanOutComplexity"/>
-        <module name="CyclomaticComplexity"/>
-        <module name="NPathComplexity"/>
-        <module name="JavaNCSS"/>
+        <module name="BooleanExpressionComplexity">
+          <property name="max" value="3"/>
+        </module>
+        <module name="ClassDataAbstractionCoupling">
+          <property name="max" value="5"/>
+        </module>
+        <module name="ClassFanOutComplexity">
+          <property name="max" value="5"/>    
+        </module>
+        <module name="CyclomaticComplexity">
+          <property name="max" value="5"/>
+        </module>
+        <module name="NPathComplexity">
+           <property name="max" value="10"/>
+        </module>
+        <module name="JavaNCSS">
+           <property name="methodMaximum" value="20"/>
+           <property name="classMaximum" value="40"/>
+           <property name="fileMaximum" value="60"/>
+        </module>
 
     </module>
 
