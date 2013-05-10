@@ -1,3 +1,6 @@
+// author: Catalin-Stefan Tiseanu
+// script for computing keeping unique (project_name, file_name) pairs
+
 #include <sstream>
 #include <map>
 #include <string>
