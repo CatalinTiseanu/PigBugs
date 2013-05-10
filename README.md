@@ -3,12 +3,13 @@ PigBugs
 
 Final project for Hadoop class.
 Most of the source files have explanatory comments related to what they do.
-They are contained in
+The relevant files are contained in
 
-+ /scripts
-+ /src/udf
-+ /src/pig
-
++ /scripts : everything
++ /src/udf : computeCheckstyle.java,computeAggregate.java,computeNcss.java
++ /src/pig : join_with_tickets.pig,main.pig,process_tickets.pig
++ /src/scraper : everything
++ /data : bugs_by_project_and_file.txt,bugs_by_project.txt,ticket_bug_count.txt
 
 Introduction
 ------------
