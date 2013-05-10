@@ -1,11 +1,14 @@
 -- author: Catalin-Stefan Tiseanu
 
-register lib/computeMetrics.jar;
+-- main pig script
+-- please note that initially two compute* UDF's were used, computeNcss and computeChecktyle, and ran separetely. The computeCombined represents the abstraction for the merged version which we are missing from the repo right now :(
+
+register lib/computeCombined.jar;
 register lib/computeAggregate.jar;
 register lib/pigbugs_checks.xml
 
 -- load the data in format (project_name, adjusted_file)) 
-data = load 'data/toy.txt' using PigStorage('\\x07') as (project_name: chararray, file_name: chararray, adjusted_file: chararray);
+data = load 'data/ApacheFull' using PigStorage('\\x07') as (project_name: chararray, file_name: chararray, adjusted_file: chararray);
 
 -- replace the 'male' separator ('\\x0B') to ('\n')
 proper_data = foreach data generate
@@ -14,10 +17,11 @@ proper_data = foreach data generate
                 REPLACE(adjusted_file, '\\x0B', '\n') as proper_file;
 
 -- run metrics on proper data
+-- computeCombined should be replaced by computeNcss or computeCheckstyle for a real run
 metrics = foreach proper_data generate
 	    project_name,
 	    file_name,
-	    computeMetrics(proper_file) as metrics_vector;
+	    computeCombined(proper_file) as metrics_vector;
 
 -- load ticket data for file
 bugs_by_file = load 'data/bugs_by_project_and_file.txt' as
