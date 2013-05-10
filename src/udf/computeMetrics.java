@@ -13,8 +13,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import com.puppycrawl.tools.checkstyle.gui.Main;
-
 public class computeMetrics extends EvalFunc<Tuple> {
     TupleFactory mTupleFactory = TupleFactory.getInstance();
     static int NumberOfCheckstyleMetrics;
@@ -56,7 +54,7 @@ public class computeMetrics extends EvalFunc<Tuple> {
       try {
         return lines.length;
       } catch (Exception e) {
-        throw null;
+        return null;
       }
     }
   
@@ -68,8 +66,9 @@ public class computeMetrics extends EvalFunc<Tuple> {
             countCheckstyleMetrics[i] = 0;
  
         try {
-          String tmpFileName = "_udf_tmp_" + NumberOfFilesProcessed;
-        
+          String tmpFileName = "_udf_tmp_" + NumberOfFilesProcessed + ".java";
+       
+          System.out.println("Write to file " + tmpFileName); 
           // we are going to write the lines to disk
           File tmpFile = new File(tmpFileName);
           FileWriter Fw = new FileWriter(tmpFile);
@@ -90,6 +89,7 @@ public class computeMetrics extends EvalFunc<Tuple> {
               for (int i = 0; i < countCheckstyleMetrics.length; i++) {
                 if (udf_str.contains(checkstyleMetrics[i])) {
                   countCheckstyleMetrics[i]++;
+                  System.out.println("Found : " + checkstyleMetrics[i]);
                 }
               }
               
@@ -100,7 +100,7 @@ public class computeMetrics extends EvalFunc<Tuple> {
           
           tmpFile.delete();
         } catch (Exception e) {
-          throw null;
+          return null;
         }
         
         // range assigned to checkstyle: 1 .... NumberOfCheckstyleMetrics + 1
@@ -116,7 +116,7 @@ public class computeMetrics extends EvalFunc<Tuple> {
           try {
             initialize();
           } catch (Exception e) {
-            throw null;
+            return null;
           }
         }
     
@@ -135,7 +135,9 @@ public class computeMetrics extends EvalFunc<Tuple> {
           
           return output;
         }catch(Exception e){
-            throw WrappedIOException.wrap("Caught exception processing input row " , e);
-        }
+            //throw WrappedIOException.wrap("Caught exception processing input row " , e);
+            System.out.println("Empty row found, continuing");
+	    return null;
+	}
     }
 }
